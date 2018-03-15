@@ -154,7 +154,7 @@ void removeNode(treeNode* &toDelete) {
 }
 //print out tree
 void print(treeNode* root, int tabs) {
-  if (root->value == 0) {
+  if (root != NULL && root->value == 0) {
     cout << "tree has no nodes" << endl;
   }
   if (root == NULL || root->value == 0) {
