@@ -67,12 +67,20 @@ treeNode* findNode(treeNode *root, int value) {
   
 }
 //used to find the smallest node on the right side of tree
-treeNode* findSuccessor(treeNode *root) {
+treeNode* findSuccessorRight(treeNode *root) {
   if (root->left == NULL) {
     return root;
   }
   
   return findSuccessor(root->left);
+}
+//used to find the largest node on the left side of tree
+treeNode* findSuccessorLeft(treeNode *root) {
+  if (root->right == NULL) {
+    return root;
+  }
+  
+  return findSuccessor(root->right);
 }
 //remove node
 void removeNode(treeNode* &toDelete) {
@@ -143,8 +151,14 @@ void removeNode(treeNode* &toDelete) {
   }
   //if to delete has two children
   else {
-    //replace the node's value with the smallest node on the right side of tree
-    treeNode *successor = findSuccessor(toDelete->right);
+    
+    treeNode *successor;
+    if (toDelete->right != NULL) { //replace the node's value with the smallest node on the right side of tree
+      successor = findSuccessorRight(toDelete->right);
+    }
+    else { //replace the node's value with the largest node on the left side of tree
+      successor = findSuccessorLeft(toDelete->left);
+    }
     int value = successor->value;
     
     removeNode(successor);
