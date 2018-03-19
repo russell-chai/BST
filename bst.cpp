@@ -72,7 +72,7 @@ treeNode* findSuccessorRight(treeNode *root) {
     return root;
   }
   
-  return findSuccessor(root->left);
+  return findSuccessorRight(root->left);
 }
 //used to find the largest node on the left side of tree
 treeNode* findSuccessorLeft(treeNode *root) {
@@ -80,7 +80,7 @@ treeNode* findSuccessorLeft(treeNode *root) {
     return root;
   }
   
-  return findSuccessor(root->right);
+  return findSuccessorLeft(root->right);
 }
 //remove node
 void removeNode(treeNode* &toDelete) {
@@ -112,6 +112,12 @@ void removeNode(treeNode* &toDelete) {
 	toDelete->value = temp->value;
 	toDelete->right = temp->right;
 	toDelete->left = temp->left;
+	if (temp->left != NULL) {
+	  temp->left->parent = toDelete;
+	}
+	if (temp->right != NULL) {
+	  temp->right->parent = toDelete;
+	}
 	delete temp;
       }
       else {
@@ -134,6 +140,12 @@ void removeNode(treeNode* &toDelete) {
 	toDelete->value = temp->value;
 	toDelete->right = temp->right;
 	toDelete->left = temp->left;
+	if (temp->left != NULL) {
+	  temp->left->parent = toDelete;
+	}
+	if (temp->right != NULL) {
+	  temp->right->parent = toDelete;
+	}
 	delete temp;
       }
       else {
